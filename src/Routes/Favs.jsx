@@ -12,6 +12,7 @@ const Favs = () => {
         {/* este componente debe consumir los destacados del localStorage */}
         {/* Deberan renderizar una Card por cada uno de ellos */}
       </div>
+      <Card></Card>
     </>
   );
 };
