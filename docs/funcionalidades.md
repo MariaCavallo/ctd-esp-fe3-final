@@ -2,12 +2,18 @@
 
 ## Indice
 
+- [Funcionalidades](#funcionalidades)
+- [Indice](#indice)
 - [Funcionalidades obligatorias](#funcionalidades-obligatorias)
-  - [Rutas](#rutas)
-    - [Página 1: Inicio (/home)](#pagina-1-inicio-home)
-    - [Página 2: Contacto (/contact)](#pagina-2-contacto)
-    - [Página 3: Detalle del dentista (/dentist/:id)](#pagina-3-detalle-del-dentista)
-    - [Página 4: Destacados (/favs)](#pagina-4-destacados)
+  - [Creación del Context](#creación-del-context)
+  - [Creación de rutas](#creación-de-rutas)
+  - [Funcionalidad de destacados](#funcionalidad-de-destacados)
+  - [Estilos](#estilos)
+- [Rutas](#rutas)
+  - [Pagina 1: Inicio Home](#pagina-1-inicio-home)
+  - [Pagina 2: Contacto](#pagina-2-contacto)
+  - [Pagina 3: Detalle del dentista](#pagina-3-detalle-del-dentista)
+  - [Pagina 4: Destacados](#pagina-4-destacados)
 - [Resultado final](#resultado-final)
 
 ## Funcionalidades obligatorias

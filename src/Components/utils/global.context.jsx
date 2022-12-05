@@ -1,51 +1,31 @@
-import { createContext, useReducer } from "react";
+import { createContext, useMemo, useReducer } from "react";
+import { actions, initialState, reducer } from "./reducer.service";
 
+export const initialStates = {theme: "", data: []};
 
-export const DarkModeContext = createContext();
+export const ContextGlobal = createContext(undefined);
 
-const reducerFunction = (state, { type }) => {
+const ContextProvider = ({ children }) => {
 
-  switch (type) {
-    case "DARK":
-      return {
-        bgFlag: "LIGHT",
-        bgColor: "#393944",
-        ftColor: "#eee"    
-      }
-    case "LIGHT":
-      return {
-        bgFlag: "DARK",
-        bgColor: "#eee",
-        ftColor: "#393944" 
-      }
-      default:
-        return state;
-  }
-}
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-const DarkModeProvider = ({ children }) => {
-
-  const initialState = { bgFlag: "DARK", ftColor: "#393944", bgColor: "#eee" }
-
-  const [state, dispatch] = useReducer(reducerFunction, initialState);
-
-    const store = {
-    state,
-    dispatch  
-  }
-  //Aqui deberan implementar la logica propia del Context, utilizando el hook useMemo
+  const providerState = useMemo(() => ({
+    theme: state.theme,
+    setDarkTheme: () => {
+      dispatch({ type: actions.SET_THEME_DARK })
+    },
+    setLightTheme: () => {
+      dispatch({ type: actions.SET_THEME_LIGHT })
+    },
+  }),
+  [state.theme]
+  );
 
   return (
-    <DarkModeContext.Provider value={store}>
-      <div style={{ 
-        backgroundColor: `${state.bgColor}`, 
-        width: "100%", height: "100vh", 
-        minHeight: "100%", color: `${state.ftColor}` 
-        }}>
+    <ContextGlobal.Provider value={providerState}>
         {children}
-      </div>
-    </DarkModeContext.Provider>
+    </ContextGlobal.Provider>
   );
 };
 
-export default DarkModeProvider;
+export default ContextProvider;

@@ -1,24 +1,29 @@
+import React, { useEffect, useContext } from "react";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
-import Home from "./Routes/Home";
-import Contact from "./Routes/Contact";
-import Favs from "./Routes/Favs";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
+import { ContextGlobal } from './Components/utils/global.context'
 
 function App() {
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { theme } = useContext(ContextGlobal);
+
+  useEffect(() => {
+    if (location.pathname === '/'){
+      navigate("/home");
+    }
+  });
+
   return (
-    <BrowserRouter>
-      <div>
+    <div className="App">
         <Navbar />
-        <Home />
+        <main>
+          <Outlet />
+        </main>
         <Footer/>
-      </div>
-      <Routes>
-        <Route path='/' element={<Home />}/>
-        <Route path='/contact' element={<Contact />}/>
-        <Route path='/favs' element={<Favs />}/>
-      </Routes>
-    </BrowserRouter>
+    </div>
   );
 }
 
