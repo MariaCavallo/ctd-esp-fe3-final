@@ -11,12 +11,12 @@ const Footer = () => {
   const navigate = useNavigate();
   return (
     <Box component='footer'>
-        <button className='goUpBtn' onClick={() => navigate("/")}>Go Up</button> 
+        <button className='goUpBtn' onClick={() => navigate("/")}>Go to top👆</button> 
         <div className='footerContainer'>
           <p>Powered by</p>
           <img src="./images/DH.png" alt='DH-logo' style={{ width: "500px", height: "100px" }}/>
         </div>
-        <div className='dark'>
+        <div>
           <a href="https://www.facebook.com"><FacebookIcon /></a>
           <a href="https://www.instagram.com"><InstagramIcon /></a>
           <a href="https://www.tiktok.com"><TiktokIcon /></a>

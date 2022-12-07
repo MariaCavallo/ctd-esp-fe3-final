@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card, CardActionArea, CardMedia, CardContent, CardActions, Typography, Button } from '@mui/material'
 import { Link } from "react-router-dom";
+import { ContextGlobal } from "./utils/global.context";
+
 
 
 const CardsDentist = ({ name, username, id }) => {
+
+  const { state } = useContext(ContextGlobal)
 
   const addFav = ()=>{
     JSON.parse(localStorage.setItem("name", name));
@@ -13,13 +17,8 @@ const CardsDentist = ({ name, username, id }) => {
   }
 
   return (
-    <div className="card" style={{ maxWidth: 345 }}>
-        {/* En cada card deberan mostrar en name - username y el id */}
-        {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
-        {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        {
           <Card className="card" sx={{ maxWidth: 345 }}>
-            <CardActionArea>
+            <CardActionArea sx={{ maxWidth: 345 }}>
               <CardMedia
                 component="img"
                 height="140"
@@ -27,20 +26,18 @@ const CardsDentist = ({ name, username, id }) => {
                 alt="doctor"
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" style={{ bgColor: state.bgColor, color: state.ftColor }}>
                   <Link to={`/dentist/${id}`}>{name}</Link>
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" style={{ bgColor: state.bgColor, color: state.ftColor }}>
                   {username}
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button onClick={addFav} className="favButton">⭐</Button>
+              <Button variant="contained" onClick={addFav} className="favButton">⭐</Button>
             </CardActions>
           </Card>
-      }
-    </div>
   );
 };
 

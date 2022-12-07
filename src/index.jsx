@@ -13,18 +13,19 @@ import Favs from './Routes/Favs';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-      <BrowserRouter>    
-        <ContextProvider>
+      <ContextProvider>
+        <BrowserRouter>    
           <Routes>
             <Route element={<App />} >
               <Route index path='/' element={<Home/>} />
+              <Route index path='/home' element={<Home/>} />
               <Route path='/contact' element={<Contact/>} />
               <Route path='/dentist/:id' element={<Detail/>} />
               <Route path='/favs' element={<Favs/>} />
             </Route>
           </Routes>
-        </ContextProvider>
-      </BrowserRouter>    
+        </BrowserRouter>    
+      </ContextProvider>
     </React.StrictMode>
 );
 

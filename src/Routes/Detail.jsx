@@ -10,15 +10,19 @@ import Paper from '@mui/material/Paper';
 const Detail = () => {
   const { id } = useParams();
   const [dentist, setDentist] = useState(null);
+
   // Consumiendo el parametro dinamico de la URL deberan hacer un fetch a un user en especifico
+
   useEffect(() => {
     axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
-    .then(res => {
+    .then(res => 
       setDentist(res.data)
-  })
+  )
   .catch(err => console.log(err))
-  })
+  }, [id])
+
   return (
+
     <div className='App'>
     {dentist ? (
     <TableContainer component={Paper}>
@@ -27,7 +31,7 @@ const Detail = () => {
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell align='right'>Email</TableCell>
-            <TableCell align='right'>Cellphone</TableCell>
+            <TableCell align='right'>Phone</TableCell>
             <TableCell align='right'>Web Site</TableCell>
           </TableRow>
         </TableHead>

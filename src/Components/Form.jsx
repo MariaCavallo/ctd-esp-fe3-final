@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Input, Typography } from "@mui/material";
+import { ContextGlobal } from "./utils/global.context";
 
 const Form = () => {
   //Aqui deberan implementar el form completo con sus validaciones
+
+  const { state } = useContext(ContextGlobal)
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   const nameValidation = (value) => {
-    return value ? value.length > 5 : false;
+    return value ? value.length > 4 : false;
   };
 
   const onChangeName = (e) => {
@@ -30,7 +33,7 @@ const Form = () => {
 
     return (
       <>
-        <form onSubmit={onSubmitForm}>
+        <form onSubmit={onSubmitForm} style={{ bgColor: state.bgColor, color: state.ftColor }}>
           <Typography color='primary' variant='h3' align='center'>Contact Form</Typography>
           <Input 
           id="nameInput" 
@@ -45,6 +48,8 @@ const Form = () => {
           onChange={onChangeEmail}/>
           <Button type="submit" variant="contained">Send</Button>
         </form>
+        <br />
+        <br />
         <p id="error_message"></p>
         <h3 id="message"> </h3>
       </>

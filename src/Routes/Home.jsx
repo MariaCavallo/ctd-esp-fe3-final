@@ -3,7 +3,8 @@ import Card from '../Components/Card';
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import axios from 'axios';
-import { CircularProgress } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
+import { useOutlet } from 'react-router-dom';
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
@@ -19,17 +20,21 @@ const Home = () => {
     .catch(err => console.log(err))
   }, [])
 
+  const outlet = useOutlet();
+
+
   return (
-    <main>
-      <h1>Home</h1>
+    <Box component="main">
       <Navbar />
-        <div className='card-grid'>
-          {/* Aqui deberias renderizar las cards */}
-          {data ? (data.map(dentist => (<Card {...dentist} key={dentist.id} /> )
-          )) : (<CircularProgress color="primary" />)}
-        </div>
+        {
+          outlet ||
+          <div className='card-grid'>
+            {data ? (data.map(dentist => (<Card {...dentist} key={dentist.id} /> )
+            )) : (<CircularProgress color="primary" />)}
+          </div>
+        }
       <Footer /> 
-    </main>
+    </Box>
   )
 }
 

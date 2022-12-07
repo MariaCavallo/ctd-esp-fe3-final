@@ -1,23 +1,17 @@
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { blueGrey, grey} from "@mui/material/colors";
+import axios from "axios";
+import { useMemo } from "react";
 import { createContext, useReducer } from "react";
-
-export const initalStates = {theme: "", data: []};
 
 export const ContextGlobal = createContext(undefined);
 
-const reducerFunction = (state, { type }) => {
-  switch (type) {
-    case "DARK":
-      return {
-        bgFlag: "LIGHT",
-        bgColor: "#393944",
-        ftColor: "#eee"
-      }
-    case "LIGHT":
-      return {
-      bgFlag: "DARK",
-      ftColor: "#393944",
-      bgColor: "#eee"
-      }
+const reducerFunction = (state, action) => {
+  switch (action.type) {
+    case "theme":
+      return {...state, Dark: !state.Dark};
+    case "data":
+      return {...state, data: action.payload}
     default:
       return state;
   }
@@ -25,21 +19,42 @@ const reducerFunction = (state, { type }) => {
 
 const ContextProvider = ({ children }) => {
 
-  const initalState = { bgFlag: "DARK", ftColor: "#393944", bgColor: "#eee" }
+  const initalState = {Dark: false, data: []}
 
   const [state, dispatch] = useReducer(reducerFunction, initalState);
 
-  const store = {
-    state, 
-    dispatch
+  const theme = createTheme({
+    palette: {
+      mode: (state.Dark ? 'dark' : 'light'),
+      primary: {
+        main: (state.Dark ? grey[600] : blueGrey[200]),
+        contrastText: (state.Dark ? "#fffff" : "#000000")
+      }
+    }
+  });
+
+  const getData = () => {
+    axios.get('https://jsonplaceholder.typicode.com/users')
+      .then(res => {
+        dispatch({ type: "data", payload: res.data})
+      })
+      .catch(err => console.log(err))
   }
 
+  useMemo(() => getData(), [])
+
+  const store = {
+    state,
+    dispatch
+  };
+
   return (
-    <ContextGlobal.Provider value={store}>
-        <div style={{ backgroundColor: `${state.bgColor}`, width: "100%", height: "100vh", minHeight: "100%", color: `${state.ftColor}` }}>
-          {children}
-        </div>
-    </ContextGlobal.Provider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <ContextGlobal.Provider value={store}>
+              {children}
+      </ContextGlobal.Provider>
+    </ThemeProvider>
   );
 };
 
