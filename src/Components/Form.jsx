@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button, Input, Typography } from "@mui/material";
 
 const Form = () => {
   //Aqui deberan implementar el form completo con sus validaciones
@@ -30,18 +31,19 @@ const Form = () => {
     return (
       <>
         <form onSubmit={onSubmitForm}>
-          <input 
+          <Typography color='primary' variant='h3' align='center'>Contact Form</Typography>
+          <Input 
           id="nameInput" 
           placeholder="Insert your name" 
           value={name} 
           onChange={onChangeName}
           />
-          <input 
+          <Input 
           id="emailInput" 
           placeholder="Insert your email" 
           value={email} 
           onChange={onChangeEmail}/>
-          <button type="submit">Send</button>
+          <Button type="submit" variant="contained">Send</Button>
         </form>
         <p id="error_message"></p>
         <h3 id="message"> </h3>

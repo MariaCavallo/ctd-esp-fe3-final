@@ -1,6 +1,7 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import axios from 'axios';
-import { useEffect, useState, useParams } from 'react'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Paper from '@mui/material/Paper';
 
 
@@ -16,9 +17,9 @@ const Detail = () => {
       setDentist(res.data)
   })
   .catch(err => console.log(err))
-  }, [id])
+  })
   return (
-    <>
+    <div className='App'>
     {dentist ? (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -32,16 +33,16 @@ const Detail = () => {
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell component="th" scope="row">{dentist.name}</TableCell>
-            <TableCell align='right'>{dentist.email}</TableCell>
-            <TableCell align='right'>{dentist.phone}</TableCell>
-            <TableCell align='right'>{dentist.website}</TableCell>
+            <TableCell component="th" scope="row">{dentist?.name}</TableCell>
+            <TableCell align='right'>{dentist?.email}</TableCell>
+            <TableCell align='right'>{dentist?.phone}</TableCell>
+            <TableCell align='right'>{dentist?.website}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
     </TableContainer>
     ) : null}
-    </>      
+    </div>      
   )
 }
 

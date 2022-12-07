@@ -1,29 +1,44 @@
-import { createContext, useMemo, useReducer } from "react";
-import { actions, initialState, reducer } from "./reducer.service";
+import { createContext, useReducer } from "react";
 
-export const initialStates = {theme: "", data: []};
+export const initalStates = {theme: "", data: []};
 
 export const ContextGlobal = createContext(undefined);
 
+const reducerFunction = (state, { type }) => {
+  switch (type) {
+    case "DARK":
+      return {
+        bgFlag: "LIGHT",
+        bgColor: "#393944",
+        ftColor: "#eee"
+      }
+    case "LIGHT":
+      return {
+      bgFlag: "DARK",
+      ftColor: "#393944",
+      bgColor: "#eee"
+      }
+    default:
+      return state;
+  }
+}
+
 const ContextProvider = ({ children }) => {
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const initalState = { bgFlag: "DARK", ftColor: "#393944", bgColor: "#eee" }
 
-  const providerState = useMemo(() => ({
-    theme: state.theme,
-    setDarkTheme: () => {
-      dispatch({ type: actions.SET_THEME_DARK })
-    },
-    setLightTheme: () => {
-      dispatch({ type: actions.SET_THEME_LIGHT })
-    },
-  }),
-  [state.theme]
-  );
+  const [state, dispatch] = useReducer(reducerFunction, initalState);
+
+  const store = {
+    state, 
+    dispatch
+  }
 
   return (
-    <ContextGlobal.Provider value={providerState}>
-        {children}
+    <ContextGlobal.Provider value={store}>
+        <div style={{ backgroundColor: `${state.bgColor}`, width: "100%", height: "100vh", minHeight: "100%", color: `${state.ftColor}` }}>
+          {children}
+        </div>
     </ContextGlobal.Provider>
   );
 };

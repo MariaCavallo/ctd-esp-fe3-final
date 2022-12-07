@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 150%;
+  position: absolute;
 }
 
 code {
@@ -13,7 +16,7 @@ code {
 }
 
 .favButton{
-  background-color: #8888881e;
+  background-color: #858383ad;
   padding: 10px;
   border: none;
   width: 100%;
@@ -35,8 +38,8 @@ nav{
   align-items: baseline;
 }
 
-nav > div > button{
-  background-color: #424242;
+nav > button{
+  background-color: #121414;
   width: 3.5vw;
   height: 3.5vh;
   border: none;
@@ -58,27 +61,25 @@ footer {
   display: flex;
   justify-content: center;
   text-align: center;
-  padding: 2rem;
   position: absolute;
-  bottom: 0;
-  width: 90%;
+  width: 96%;
+  top: 79em;
   height: 40px;
-  margin-top: 2rem;
 }
 
-footer button{
+.goUpBtn{
   background-color: rgb(151, 56, 56);
   color: white;
   position: absolute;
   border: none;
-  bottom: 12em;
+  bottom: 6em;
   width: 100vw;
   height: 4vw;
   margin-left: 3%;
   cursor: pointer;
 }
 
-footer button:hover{
+.goUpBtn:hover{
   background-color: rgb(175, 80, 80);
   color: rgb(136, 136, 136);
 }
@@ -88,6 +89,7 @@ footer > div{
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 8px;
   padding-left: 1em;
   padding-right: 8rem;
   right: 0em;
@@ -109,6 +111,9 @@ form{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
+  font-size: 1.5rem;
+  gap: 8px;
   width: 300px;
   height: 100px;
   margin: 0 auto;
@@ -158,14 +163,15 @@ tr:nth-child(even) {
 }
 
 .dark{
-  background-color: #12121296;
+  background-color: #7c7c7c9f;
   color: white;
-  width: 1vw;
+  width: 4vw;
   position: relative;
   height: 5vh;
-  margin-left: 12em;
+  margin-left: 15em;
   margin-top: -1em;
 }
-.dark > a {
+
+.dark a {
   color: white;
 }

@@ -16,8 +16,8 @@ root.render(
       <BrowserRouter>    
         <ContextProvider>
           <Routes>
-            <Route path='/' element={<App />} >
-              <Route index path='/home' element={<Home/>} />
+            <Route element={<App />} >
+              <Route index path='/' element={<Home/>} />
               <Route path='/contact' element={<Contact/>} />
               <Route path='/dentist/:id' element={<Detail/>} />
               <Route path='/favs' element={<Favs/>} />

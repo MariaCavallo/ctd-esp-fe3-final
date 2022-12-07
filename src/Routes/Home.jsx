@@ -1,5 +1,7 @@
 import { useState, useEffect  } from 'react';
 import Card from '../Components/Card';
+import Navbar from '../Components/Navbar'
+import Footer from '../Components/Footer'
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
 
@@ -20,11 +22,13 @@ const Home = () => {
   return (
     <main>
       <h1>Home</h1>
-      <div className='card-grid'>
-        {/* Aqui deberias renderizar las cards */}
-        {data ? (data.map(item => (<Card key={item.id} name={item.name} username={item.username} id={item.id} /> )
-        )) : (<CircularProgress color="primary" />)}
-      </div>
+      <Navbar />
+        <div className='card-grid'>
+          {/* Aqui deberias renderizar las cards */}
+          {data ? (data.map(dentist => (<Card {...dentist} key={dentist.id} /> )
+          )) : (<CircularProgress color="primary" />)}
+        </div>
+      <Footer /> 
     </main>
   )
 }
