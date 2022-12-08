@@ -1,24 +1,24 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import Card from "../Components/Card";
-import ContextGlobal from '../Components/utils/global.context'
+import { favsLocalSotrage } from '../Components/utils/FavsLocalStorage'
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Favs = () => {
-  const [favs, setFavs] = useState([]);
-  const { state } = useContext(ContextGlobal)
 
-  useEffect(() => {
-    setFavs(JSON.parse(localStorage.getItem("favs")))
-  }, [favs])
+  const localFavs = favsLocalSotrage();
 
   return (
-    <div style={{ bgColor: state.bgColor, color: state.ftColor }}>
-      <h1 style={{ bgColor: state.bgColor, color: state.ftColor }}>Dentists Favs</h1>
-      <div className="card-grid">
-        {favs?.map(fav => <Card {...fav} key={fav.id}/>)}
-      </div>
-    </div>
+      <main>
+        <h1>Dentist Fav</h1>
+          <div className='card-grid'>
+            {localFavs.length
+            ? localFavs.map((dentistFav) => (
+            <Card {...dentistFav} key={dentistFav.matricula} />
+            ))
+            : null}
+          </div>
+      </main>
   );
 };
 

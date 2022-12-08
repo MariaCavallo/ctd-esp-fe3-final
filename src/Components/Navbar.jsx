@@ -7,19 +7,29 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 
 
 const Navbar = () => {
-  const { state, dispatch } = useContext(ContextGlobal)
+  const { theme, setDarkTheme, setLightTheme } = useContext(ContextGlobal);
+  const isDarkMode = theme === "dark" || false;
+
+  const changeTheme = () => {
+    if(isDarkMode) setLightTheme();
+    else setDarkTheme();
+  }
   return (
-      <nav style={{ bgColor: state.bgColor, color: state.ftColor }}>
+      <nav className={`navbar navbar-expand-sm ${
+        isDarkMode ? "navbar-dark bg-dark" : "navbar-light bg-light"
+      }`} >
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar sx={{ bgColor: state.bgColor, color: state.ftColor }}>
-            <Toolbar style={{ bgColor: state.bgColor, color: state.ftColor }}>
-              <Typography style={{ bgColor: state.bgColor, color: state.ftColor }} variant='h6' noWrap component="div" sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
+          <AppBar>
+            <Toolbar>
+              <Typography variant='h6' noWrap component="div" sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
                 <span style={{ color: "red"}}>D</span>H ODONTO
               </Typography>
               <Link to="/">Home</Link>
               <Link to="/contact">Contact</Link>
               <Link to="/Favs">Favs</Link>
-              <Button variant='contained' onClick={() => dispatch({ type: "theme" })}>{state.Dark ? <LightModeIcon/> : <DarkModeIcon />}</Button>
+              <Button variant='contained' onClick={changeTheme}>
+                {isDarkMode ? <LightModeIcon/> : <DarkModeIcon />}
+              </Button>
             </Toolbar>
           </AppBar>
         </Box>

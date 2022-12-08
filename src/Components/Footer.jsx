@@ -1,22 +1,31 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import TiktokIcon from '@mui/icons-material/AudiotrackOutlined';
 import { Box } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { ContextGlobal } from './utils/global.context';
 
 
 const Footer = () => {
-  const navigate = useNavigate();
+  const { theme } = useContext(ContextGlobal)
+  const isDarkMode = theme === "dark" || false
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0, 
+      behavior: 'smooth'
+    })
+  }
+
   return (
     <Box component='footer'>
-        <button className='goUpBtn' onClick={() => navigate("/")}>Go to top👆</button> 
+        <button className='goToTopBtn' onClick={scrollToTop}>Go to top👆</button> 
         <div className='footerContainer'>
           <p>Powered by</p>
           <img src="./images/DH.png" alt='DH-logo' style={{ width: "500px", height: "100px" }}/>
         </div>
-        <div>
+        <div className={`dark ${isDarkMode ? "dark" : "light"}`}>
           <a href="https://www.facebook.com"><FacebookIcon /></a>
           <a href="https://www.instagram.com"><InstagramIcon /></a>
           <a href="https://www.tiktok.com"><TiktokIcon /></a>
