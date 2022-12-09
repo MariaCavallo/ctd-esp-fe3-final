@@ -20,15 +20,15 @@ export const setFavoritesStorage = (dentist) => {
     }
 }
 
-export const removeFavoriteStorage = (id, name) => {
+export const removeFavoriteStorage = (id) => {
     let favorites = favsLocalSotrage();
-    const index = favorites.findIndex(fav => fav.id === id);
+    const index = favorites.findIndex(dentist => dentist.id === id);
     if(index !== -1){
         favorites.splice(index, 1);
         localStorage.setItem("favs", JSON.stringify(favorites));
-        alert(`Dentist ${name} was removed from the list`)
+        alert('The dentist was removed from the favorites list.')
     }else{
-        alert(`Dentist ${name} could not be removed from the list`)
+        alert('The dentist could not be removed from the favorites list.')
     }
 
 }

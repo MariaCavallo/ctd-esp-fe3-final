@@ -13,7 +13,7 @@ const Favs = () => {
         <h1>Dentist Fav</h1>
           <div className='card-grid'>
             {localFavs?.map((dentistFav) => (
-            <Card {...dentistFav} key={dentistFav.matricula} />
+            <Card {...dentistFav} key={dentistFav.id} />
             ))}
           </div>
       </main>

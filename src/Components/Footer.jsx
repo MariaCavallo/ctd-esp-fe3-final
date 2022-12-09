@@ -15,7 +15,7 @@ const Footer = () => {
   }
 
   return (
-    <footer>
+    <footer className='footer'>
         <button className='goToTopBtn' onClick={scrollToTop}>Go to top👆</button> 
         <div>
           <p>Powered by</p>
