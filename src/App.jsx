@@ -1,15 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { ContextGlobal } from "./Components/utils/global.context";
 
 
 function App() {
   const location = useLocation;
   const navigate = useNavigate();
-  const { theme } = useContext(ContextGlobal);
-  const isDarkMode = theme === "dark" || false;
 
   useEffect(() => {
     if (location.pathname === '/'){
@@ -18,11 +15,9 @@ function App() {
   })
 
   return (
-    <div className={`app ${isDarkMode ? "dark" : "light"}`}>
+    <div className="App">
         <Navbar />
-        <main>
-          <Outlet />
-        </main>
+        <Outlet />
         <Footer/>
     </div>
   );

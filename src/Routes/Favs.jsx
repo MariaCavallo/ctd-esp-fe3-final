@@ -12,11 +12,9 @@ const Favs = () => {
       <main>
         <h1>Dentist Fav</h1>
           <div className='card-grid'>
-            {localFavs.length
-            ? localFavs.map((dentistFav) => (
+            {localFavs?.map((dentistFav) => (
             <Card {...dentistFav} key={dentistFav.matricula} />
-            ))
-            : null}
+            ))}
           </div>
       </main>
   );

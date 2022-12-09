@@ -1,16 +1,13 @@
-import React, { useContext } from "react";
-import { Card, CardActionArea, CardMedia, CardContent, CardActions, Typography } from '@mui/material'
+import React from "react";
+import { Card, CardActionArea, CardMedia, CardContent, CardActions, Typography} from '@mui/material'
+import Button from '@mui/material/Button'
 import { Link } from "react-router-dom";
-import { ContextGlobal } from "./utils/global.context";
 import { setFavoritesStorage, removeFavoriteStorage, isFavorited } from "./utils/FavsLocalStorage";
 import { useState } from "react";
 
 
-
 const CardsDentist = ({ name, username, id }) => {
   const [favorite, setFavorite] = useState(() => isFavorited(id));
-  const { theme } = useContext(ContextGlobal);
-  const isDarkMode = theme === "dark" || false;
 
   const isFavorite = (favorite) => {
     setFavorite(favorite);
@@ -27,9 +24,9 @@ const CardsDentist = ({ name, username, id }) => {
   };
 
   return (
-          <Card className={`card ${isDarkMode ? "#12121296" : "#fffff"}`} sx={{ maxWidth: 345 }}>
+          <Card sx={{ maxWidth: 345, width: window.innerWidth < 800 ? '50vw' : '10vw', minWidth: '200px', display: {xs: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}}>
             <CardActionArea sx={{ maxWidth: 345 }}>
-              <Link to={`/dentist/${id}`}/>
+              <Link to={`/dentist/${id}`}>
               <CardMedia
                 component="img"
                 height="140"
@@ -38,19 +35,21 @@ const CardsDentist = ({ name, username, id }) => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  <Link to={`/dentist/${id}`}>{name}</Link>
+                  {name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {username}
                 </Typography>
               </CardContent>
+              </Link>
             </CardActionArea>
             <CardActions>
-              <button 
-              onClick={favorite ? removeFav : addFav}
-              className={`favButton ${isDarkMode ? "dark" : "light"}`}>
+              <Button 
+              sx={{left: "32%"}}
+              variant="contained"
+              onClick={favorite ? removeFav : addFav}>
                 {favorite ? "❌" : "⭐"}
-              </button>
+              </Button>
             </CardActions>
           </Card>
   );

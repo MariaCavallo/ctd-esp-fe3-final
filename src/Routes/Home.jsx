@@ -1,36 +1,41 @@
-import { useState, useEffect  } from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../Components/Card';
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
 import { useOutlet } from 'react-router-dom';
+import axios from 'axios';
+import Navbar from '../Components/Navbar'
+import Footer from '../Components/Footer'
 
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+
 
 const Home = () => {
-  const [dentist, setDentist] = useState([]);
+
+  const [data, setData] = useState(null)
 
   useEffect(() => {
-    try {
-      fetch(`https://jsonplaceholder.typicode.com/users`)
-        .then((res) => res.json())
-        .then((data) => setDentist(data));
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
+    axios.get('https://jsonplaceholder.typicode.com/users')
+      .then(res => setData(res.data))
+      .catch(err => console.log(err))
+  },[])
 
   const outlet = useOutlet();
 
 
   return (
     <Box component="main">
+      <Navbar />
         {
           outlet ||
           <div className='card-grid'>
-            {dentist.length ? dentist.map(
-              (dentist) => ( <Card {...dentist} key={dentist.matricula} />))
-            : (<CircularProgress color="primary" />)}
+              {data?.map((dentists) => 
+              <Card key={dentists.id} 
+              name={dentists.name} 
+              username={dentists.username} 
+              id={dentists.id} 
+              />)}
           </div>
         }
+      <Footer />
     </Box>
   )
 }
